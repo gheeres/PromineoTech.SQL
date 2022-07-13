@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import com.promineotech.bank.model.AccountModel;
 
-public class StaticAccountRepository implements AccountRepository {
+public class AccountListRepository implements AccountRepository {
   private static final List<AccountModel> defaultAccounts = List.of(
     new AccountModel("123456", "bob@bank.com").setBalance(1000F),
     new AccountModel("123456-002", "bob@bank.com").setBalance(301F),
@@ -18,13 +18,13 @@ public class StaticAccountRepository implements AccountRepository {
   );
   protected List<AccountModel> accounts;
   
-  public StaticAccountRepository() {
+  public AccountListRepository() {
     this(defaultAccounts);
   }
-  public StaticAccountRepository(List<AccountModel> accounts) {
+  public AccountListRepository(List<AccountModel> accounts) {
     if (accounts != null) {
       this.accounts = accounts.stream()
-          .collect(Collectors.toList());
+                              .collect(Collectors.toList());
     }
     else { 
       this.accounts = new ArrayList<>();
@@ -33,54 +33,30 @@ public class StaticAccountRepository implements AccountRepository {
   
   @Override
   public AccountModel save(String number, String owner, Float balance) {
-    if ((number != null) && (! number.isEmpty())) {
-      Optional<AccountModel> existingAccount = get(number);
-      if (! existingAccount.isPresent()) {
-        AccountModel newAccount = new AccountModel(number, owner);
-        newAccount.setBalance(balance);
-        accounts.add(newAccount);
-        return(newAccount);
-      }
-
-      existingAccount.get().setBalance(balance);
-      return(existingAccount.get());
-    }
+    // TODO
     return(null);
   }
 
   @Override
   public AccountModel remove(String number) {
-    if ((number != null) && (! number.isEmpty())) {
-      AccountModel account = get(number).get();
-      if (account != null) {
-        accounts.remove(account);
-        return(account);
-      }
-    }
+    // TODO
     return(null);
   }
 
   @Override
   public Optional<AccountModel> get(String number) {
-    if ((number != null) && (! number.isEmpty())) {
-      return accounts.stream()
-                     .filter((a) -> a.getNumber().equalsIgnoreCase(number))
-                     .findFirst();
-    }
+    // TODO
     return Optional.empty();
   }
 
   @Override
   public Stream<AccountModel> ownedBy(String owner) {
-    if ((owner != null) && (! owner.isEmpty())) {
-      return accounts.stream()
-                     .filter((a) -> a.getOwner().equalsIgnoreCase(owner));
-    }
+    // TODO
     return Stream.empty();
   }
   @Override
   public Stream<AccountModel> all() {
-    return(accounts.stream());
+    return Stream.empty();
   }
 
   @Override

@@ -3,8 +3,8 @@ package com.promineotech.bank;
 import java.io.IOException;
 import java.util.stream.Stream;
 import com.promineotech.bank.model.AccountModel;
+import com.promineotech.bank.repository.AccountCSVRepository;
 import com.promineotech.bank.repository.AccountRepository;
-import com.promineotech.bank.repository.JdbcAccountRepository;
 
 public class Application {
   private final String connectionString = "jdbc:mysql://localhost:3306/bank?allowMultiQueries=true";
@@ -18,21 +18,15 @@ public class Application {
   }
 
   public AccountRepository GetRepository(String[] args) {
-    //return(new StaticAccountRepository());
-    return(new JdbcAccountRepository(connectionString, username, password));
-    ////String filename = "/home/gheeres/Projects/java/SQL.demo/Account.csv";
-    //String filename = "C:\\Users\\micro\\eclipse-workspace\\Banking-Master\\Account.csv";
-    //System.out.println("Don't forget to set the full path for the Account.csv file. Current: " + filename);
-    //return(new CSVAccountRepository(filename));
+    //return(new AccountListRepository());
+    //return(new AccountJDBCRepository(connectionString, username, password));
+    return(new AccountCSVRepository("./Data/Account.csv"));
+    //return(new EmptyAccountRepository());
   }
   
   public void run(String[] args) {
     try (AccountRepository repository = GetRepository(args)) {
-      Stream<AccountModel> accounts = repository.all();
-      accounts = accounts.sorted((a1,a2) -> a1.getBalance().compareTo(a2.getBalance()));
-      accounts.forEach((account) -> {
-        System.out.println(account);
-      });
+      // TODO
     } catch (IOException e) {
     }
   }
