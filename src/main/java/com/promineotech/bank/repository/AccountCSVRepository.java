@@ -15,7 +15,8 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
 import com.promineotech.bank.model.AccountModel;
 
-public class AccountCSVRepository extends AccountListRepository implements AccountRepository, Closeable {
+public class AccountCSVRepository extends AccountListRepository 
+                                  implements AccountRepository, Closeable {
   private static final String[] HEADER = new String[] {
     "Account",
     "Owner",

@@ -43,20 +43,41 @@ public class AccountListRepository implements AccountRepository {
     return(null);
   }
 
+  //public AccountModel getBad(String number) {
+  //  return null;
+  //}
+  
   @Override
   public Optional<AccountModel> get(String number) {
-    // TODO
-    return Optional.empty();
+    //for(AccountModel a : this.accounts) {
+    //  if (a.getNumber().equalsIgnoreCase(number)) {
+    //    return a;
+    //  }
+    //}
+    //return null;
+    
+    return this.accounts.stream()
+        .filter(a -> a.getNumber().equalsIgnoreCase(number))
+        .findFirst();
   }
 
   @Override
   public Stream<AccountModel> ownedBy(String owner) {
-    // TODO
-    return Stream.empty();
+    //List<AccountModel> accounts = new ArrayList<>();
+    //for(AccountModel account : this.accounts) {
+    //  if (account.getOwner().equalsIgnoreCase(owner)) {
+    //    accounts.add(account); 
+    //  }
+    //}
+    //return accounts;
+
+    return this.accounts.stream()
+        .filter(account -> account.getOwner().equalsIgnoreCase(owner));
   }
+  
   @Override
   public Stream<AccountModel> all() {
-    return Stream.empty();
+    return this.accounts.stream();
   }
 
   @Override

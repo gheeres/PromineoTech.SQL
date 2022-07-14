@@ -3,6 +3,7 @@
   <groupId>com.promineotech</groupId>
   <artifactId>SQL-Week5</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  
   <dependencies>
   	<dependency>
   	  <groupId>mysql</groupId>
